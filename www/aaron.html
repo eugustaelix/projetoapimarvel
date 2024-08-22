@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="cordova.js"></script>
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .series {
+            margin: 20px;
+            padding: 20px;
+            background-color: #2b2d2f;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            display: inline-block;
+            width: 300px; /* Ajuste a largura conforme necessário */
+            vertical-align: top;
+        }
+        .series img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .series h2 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .series p {
+            font-size: 14px;
+            color: #666;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1d1f21;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+ 
+        .logomarvel {
+            width: 150px;
+            height: 80px;
+        }
+ 
+        h1 {
+            margin-top: 0px;
+            text-align: center;
+            font-size: 2.5rem;
+            color: #f0141e;
+            text-transform: uppercase;
+            text-shadow: 0px 0px 15px rgba(255,0,0,0.5);
+        }
+ 
+        .personagem-lista {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+ 
+        .personagem {
+            background-color: #2b2d2f;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+ 
+        .personagem img {
+            width: 100%;
+            border-bottom: 3px solid #f0141e;
+        }
+ 
+        .personagem-info {
+            padding: 15px;
+        }
+ 
+        .personagem-info h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: #f0141e;
+        }
+ 
+        .personagem-info p {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+ 
+        .personagem:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+ 
+        .cabecalho {
+            background-color: red;
+            height: 10px;
+            width: 100%;
+            box-shadow: 0px 0px 15px rgba(255, 0, 0, 1);
+        }
+        
+        .verpersonagens{
+                color: red !important;
+    text-decoration: none;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    background: white;
+    padding: 15px;
+    border-radius: 20px;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0);
+        }
+
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const timeStamp = '1724352354';
+            const apikey = 'e3970d4b3206ae9c9a903f2eebac9290';
+            const md5 = '72eeba958ff529ec7e00d88ccfd19614';
+            const characterId = 1009176; // A-Bomb (HAS) ID
+
+            fetch(`https://gateway.marvel.com:443/v1/public/characters/${characterId}/series?ts=${timeStamp}&apikey=${apikey}&hash=${md5}`)
+                .then(response => response.json())
+                .then(data => {
+                    const series = data.data.results;
+                    const container = document.getElementById('series');
+
+                    if (series.length === 0) {
+                        container.innerHTML = '<p>No series found for this character.</p>';
+                        return;
+                    }
+
+                    series.forEach(serie => {
+                        const div = document.createElement('div');
+                        div.className = 'series';
+
+                        const img = document.createElement('img');
+                        img.src = `${serie.thumbnail.path}.${serie.thumbnail.extension}`;
+                        img.alt = serie.title;
+
+                        const title = document.createElement('h2');
+                        title.textContent = serie.title;
+
+                        const description = document.createElement('p');
+                        description.textContent = serie.description || 'No description available';
+
+                        div.appendChild(img);
+                        div.appendChild(title);
+                        div.appendChild(description);
+                        container.appendChild(div);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('series').innerHTML = '<p>Error loading series. Please check the console for details.</p>';
+                });
+        });
+    </script>
+</head>
+<body>
+     <div class="cabecalho"></div>
+    <img src="marvel.png" class="logomarvel">
+    <h1>Aaron Stack</h1>
+    <div id="series"></div>
+        <a href='personagens.html' class="verpersonagens">Voltar</a>
+</body>
+</html>

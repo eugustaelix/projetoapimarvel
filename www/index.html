@@ -9,42 +9,13 @@
     <link rel="stylesheet" href="components/loader.css">
     <link rel="stylesheet" href="css/style.css">
      <title>Personagens da Marvel</title>
-    <script>
-    </script>
+    <!-- GUSTAVO FELIX FERREIRA DA SILVA - 2MD2 -->
 </head>
 <body>
     <div class="cabecalho"></div>
-    <h1>Personagens da Marvel</h1>
-    <div class="personagem-lista" id="personagemlista"></div>
-
-    <script>
-        const timeStamp = '1724323996';
-        const apikey = '2e1a62fa43f76005dece5fee74796b2e';
-        const md5 = '5b47fdb0d38215e89ccee5ffaec9618d';
-
-        fetch(`https://gateway.marvel.com:443/v1/public/characters?ts=${timeStamp}&apikey=${apikey}&hash=${md5}&limit=6`)
-            .then((response) => response.json())
-            .then((data) => {
-                const personagemlista = document.getElementById('personagemlista');
-                const personagems = data.data.results;
-
-                personagems.forEach(personagem => {
-                    const personagemElement = document.createElement('div');
-                    personagemElement.classList.add('personagem');
-                    personagemElement.innerHTML = `
-                        <img src="${personagem.thumbnail.path}.${personagem.thumbnail.extension}" alt="${personagem.name}">
-                        <div class="personagem-info">
-                            <h2>${personagem.name}</h2>
-                            <p>${personagem.description || 'Descrição não disponível.'}</p>
-                        </div>
-                    `;
-                    personagemlista.appendChild(personagemElement);
-                });
-            })
-            .catch((error) => {
-                console.error('Erro ao buscar dados:', error);
-            });
-    </script>
+    <img src="marvel.png" class="logomarvel">
+    <h1>PÁGINA INICIAL</h1>
+    <a href='personagens.html' class="verpersonagens">Ver personagens</a>
 </body>
 
 </html>
