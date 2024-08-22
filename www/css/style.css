@@ -1,0 +1,78 @@
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1d1f21;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 2.5rem;
+            color: #f0141e;
+        }
+
+        .personagem-lista {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .personagem {
+            background-color: #2b2d2f;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .personagem img {
+            width: 100%;
+            border-bottom: 3px solid #f0141e;
+        }
+
+        .personagem-info {
+            padding: 15px;
+        }
+
+        .personagem-info h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: #f0141e;
+        }
+
+        .personagem-info p {
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .personagem:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (min-width: 768px) {
+            .personagem-lista {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .personagem-lista {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .cabecalho{
+            background-color: red;
+            height: 10px;
+            width: 100%;
+            box-shadow: 0px 0px 15px rgba(255, 0, 0, 1);
+        }
